@@ -23,7 +23,9 @@ if ! command -v create-dmg >/dev/null 2>&1; then
   exit 1
 fi
 
-python3 scripts/make_dmg_background.py
+if [ ! -f "assets/dmg_background.png" ]; then
+  python3 scripts/make_dmg_background.py
+fi
 
 rm -f "$DMG"
 create-dmg \

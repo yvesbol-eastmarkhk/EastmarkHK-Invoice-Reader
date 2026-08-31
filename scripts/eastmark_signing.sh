@@ -1,6 +1,5 @@
 #!/bin/bash
 # Shared EastmarkHK signing helpers (aligned with e-Invoicing tool/build_dmg.sh).
-set -euo pipefail
 
 eastmark_resolve_signing_identity() {
   if [ -n "${DEVELOPER_ID_SIGNING_IDENTITY:-}" ]; then

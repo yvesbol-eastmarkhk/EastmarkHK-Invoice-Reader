@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python (DMG background helper)
+.venv/
+__pycache__/
+*.egg-info/
+
+# Build outputs
+build/
+dist/
+DerivedData/
+*.dmg
+*.zip
+
+# Xcode (generated via XcodeGen)
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+*.xcuserstate
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Secrets / signing (never commit)
+.env
+.env.*
+*.p12
+*.cer
+*.mobileprovision
+AuthKey_*.p8
+notary-credentials.json

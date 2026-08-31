@@ -1,0 +1,34 @@
+name: EastmarkHK Invoice Reader
+options:
+  bundleIdPrefix: com.eastmarkhk
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+targets:
+  EastmarkHK_Invoice_Reader:
+    type: application
+    platform: macOS
+    sources:
+      - path: EastmarkHK_Invoice_Reader
+    resources:
+      - path: assets
+      - path: EastmarkHK_Invoice_Reader/Assets.xcassets
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.eastmarkhk.peppol-invoice-reader
+        PRODUCT_NAME: EastmarkHK Invoice Reader
+        INFOPLIST_KEY_CFBundleDisplayName: EastmarkHK Invoice Reader
+        INFOPLIST_KEY_CFBundleName: EastmarkHK Invoice Reader
+        CODE_SIGN_ENTITLEMENTS: EastmarkHK_Invoice_Reader/EastmarkHK_Invoice_Reader.entitlements
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.business
+        GENERATE_INFOPLIST_FILE: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        COMBINE_HIDPI_IMAGES: YES
+        ENABLE_HARDENED_RUNTIME: YES
+        DEVELOPMENT_TEAM: GXA7QXQK2X
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"

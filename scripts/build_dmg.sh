@@ -15,8 +15,6 @@ DEVELOPER_ID_SIGNING_IDENTITY="$(eastmark_resolve_signing_identity)"
 DEVELOPMENT_TEAM="$(eastmark_resolve_team_id)"
 NOTARY_PROFILE="$(eastmark_resolve_notary_profile)"
 
-python3 scripts/make_dmg_background.py
-
 xcodegen generate
 
 XCODEBUILD_ARGS=(
@@ -26,9 +24,6 @@ XCODEBUILD_ARGS=(
   -derivedDataPath build/DerivedData
   DEVELOPMENT_TEAM="$DEVELOPMENT_TEAM"
 )
-if [ -n "$DEVELOPER_ID_SIGNING_IDENTITY" ]; then
-  XCODEBUILD_ARGS+=(CODE_SIGN_IDENTITY="$DEVELOPER_ID_SIGNING_IDENTITY")
-fi
 
 xcodebuild "${XCODEBUILD_ARGS[@]}" build
 
@@ -52,19 +47,7 @@ else
 fi
 
 rm -f "$DMG" "EastmarkHK_Invoice_Reader.dmg"
-create-dmg \
-  --volname "$APP_DISPLAY_NAME" \
-  --volicon "AppIcon.icns" \
-  --background "assets/dmg_background.png" \
-  --window-pos 200 120 \
-  --window-size 660 400 \
-  --icon-size 96 \
-  --icon "${APP_DISPLAY_NAME}.app" 170 185 \
-  --hide-extension "${APP_DISPLAY_NAME}.app" \
-  --app-drop-link 490 185 \
-  --no-internet-enable \
-  "$DMG" \
-  "dist/"
+"$ROOT/scripts/package_dmg.sh" dist "$DMG"
 
 if [ -n "$DEVELOPER_ID_SIGNING_IDENTITY" ]; then
   echo "==> Signing DMG…"
@@ -72,7 +55,6 @@ if [ -n "$DEVELOPER_ID_SIGNING_IDENTITY" ]; then
 fi
 
 echo "Built: $DIST"
-echo "DMG:   $ROOT/$DMG"
 
 if [ "$NOTARIZE" != "1" ]; then
   echo "Notarization skipped (NOTARIZE=0). Run: NOTARIZE=1 ./scripts/build_dmg.sh"

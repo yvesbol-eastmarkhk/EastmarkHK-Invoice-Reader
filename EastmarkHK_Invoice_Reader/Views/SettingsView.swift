@@ -14,7 +14,7 @@ struct SettingsView: View {
             Section(l10n.t("settingsLanguage")) {
                 Picker(l10n.t("settingsLanguage"), selection: $selectedLanguageKey) {
                     ForEach(AppLanguages.all) { option in
-                        Text(AppLanguages.displayName(for: option.storageKey, systemLabel: l10n.t("settingsLanguageSystem")))
+                        Text(AppLanguages.labeledTitle(for: option, systemLabel: l10n.t("settingsLanguageSystem")))
                             .tag(option.storageKey)
                     }
                 }

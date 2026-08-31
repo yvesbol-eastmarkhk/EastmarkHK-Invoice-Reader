@@ -59,8 +59,9 @@ Default repo name: `EastmarkHK-Invoice-Reader` (override with `GITHUB_REPO_NAME`
 2. **Product → Xcode Cloud → Create Workflow**.
 3. Connect the GitHub repository created above.
 4. Scheme: `EastmarkHK_Invoice_Reader`, platform: macOS.
-5. `ci_scripts/ci_post_clone.sh` installs XcodeGen and generates the project.
-6. For notarized archives, set in Xcode Cloud environment:
+5. `ci_scripts/ci_post_clone.sh` installs XcodeGen, `create-dmg`, and generates the project.
+6. Use an **Archive** workflow action (not Build-only) — `ci_scripts/ci_post_xcodebuild.sh` packages the archived app as `EastmarkHK Invoice Reader.dmg`.
+7. For a notarized DMG, set in Xcode Cloud environment:
    - `NOTARIZE=1`
    - `NOTARY_KEYCHAIN_PROFILE=EastmarkHK`
 

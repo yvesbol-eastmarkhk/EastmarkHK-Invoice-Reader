@@ -9,5 +9,10 @@ if ! command -v xcodegen >/dev/null 2>&1; then
   brew install xcodegen
 fi
 
+if ! command -v create-dmg >/dev/null 2>&1; then
+  echo "Installing create-dmg…"
+  brew install create-dmg
+fi
+
 echo "Generating Xcode project…"
 xcodegen generate

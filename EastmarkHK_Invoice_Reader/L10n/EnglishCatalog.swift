@@ -32,6 +32,7 @@ enum EnglishCatalog {
 
         "alertOpenFailed": "Could not open file",
         "panelOpenTitle": "Open PEPPOL invoice",
+        "panelOpenMessage": "Choose a PEPPOL / UBL invoice XML file.",
         "panelSaveTitle": "Save invoice PDF",
         "defaultInvoiceFilename": "invoice",
 

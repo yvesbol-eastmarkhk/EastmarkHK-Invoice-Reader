@@ -15,6 +15,13 @@ final class InvoiceDocument: ObservableObject {
     @Published var errorMessage: String?
 
     func open(url: URL) {
+        let accessed = url.startAccessingSecurityScopedResource()
+        defer {
+            if accessed {
+                url.stopAccessingSecurityScopedResource()
+            }
+        }
+
         do {
             let parsed = try PeppolParser.parse(url: url)
             invoice = parsed
@@ -46,6 +53,12 @@ final class InvoiceDocument: ObservableObject {
 
     func savePDF(to url: URL) throws {
         guard let pdfData else { return }
+        let accessed = url.startAccessingSecurityScopedResource()
+        defer {
+            if accessed {
+                url.stopAccessingSecurityScopedResource()
+            }
+        }
         try pdfData.write(to: url)
         status = Status(key: "statusSaved", args: ["filename": url.lastPathComponent])
     }
@@ -97,6 +110,12 @@ struct MainView: View {
         .onChange(of: l10n.revision) {
             document.refreshGeneratedPDFIfNeeded()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .openInvoiceXML)) { _ in
+            openXML()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .saveInvoicePDF)) { _ in
+            savePDF()
+        }
         .overlay {
             if let progress = l10n.translationProgress {
                 TranslationProgressOverlay(progress: progress)
@@ -113,7 +132,7 @@ struct MainView: View {
         case .lines:
             LinesView(invoice: document.invoice)
         case .xml:
-            XmlView(xml: document.invoice?.rawXML ?? "")
+            XmlView(xml: document.invoice?.rawXML ?? "", onOpen: openXML)
         case .pdf:
             PdfPreviewView(data: document.pdfData)
         }
@@ -122,10 +141,19 @@ struct MainView: View {
     private func openXML() {
         let panel = NSOpenPanel()
         panel.title = l10n.t("panelOpenTitle")
-        panel.allowedContentTypes = [.xml]
+        panel.message = l10n.t("panelOpenMessage")
+        panel.prompt = l10n.t("actionOpenXml")
+        panel.allowedContentTypes = [.xml, .data]
+        panel.allowsOtherFileTypes = true
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
         panel.allowsMultipleSelection = false
+        panel.treatsFilePackagesAsDirectories = false
+
+        NSApp.activate(ignoringOtherApps: true)
         guard panel.runModal() == .OK, let url = panel.url else { return }
         document.open(url: url)
+        selectedTab = .summary
     }
 
     private func savePDF() {
@@ -135,6 +163,7 @@ struct MainView: View {
         panel.allowedContentTypes = [.pdf]
         let fallback = l10n.t("defaultInvoiceFilename")
         panel.nameFieldStringValue = "\(invoice.invoiceID.isEmpty ? fallback : invoice.invoiceID).pdf"
+        NSApp.activate(ignoringOtherApps: true)
         guard panel.runModal() == .OK, let url = panel.url else { return }
         do {
             try document.savePDF(to: url)

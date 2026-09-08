@@ -28,7 +28,7 @@ enum AppTab: String, CaseIterable, Identifiable {
     }
 }
 
-/// Single top row: traffic lights inset · logo · tabs · actions · settings.
+/// Top chrome: titlebar drag strip, then a fully interactive row (tabs + Open XML).
 struct AppChromeBar: View {
     @EnvironmentObject private var l10n: L10n
     @Environment(\.openSettings) private var openSettings
@@ -38,58 +38,66 @@ struct AppChromeBar: View {
     var saveDisabled: Bool
 
     var body: some View {
-        HStack(spacing: 0) {
-            Color.clear
-                .frame(width: WindowChromeMetrics.trafficLightLeadingInset)
-                .accessibilityHidden(true)
-
-            if let logo = NSImage(named: "eastmarkhk_logo") {
-                Image(nsImage: logo)
-                    .resizable()
-                    .interpolation(.high)
-                    .scaledToFit()
-                    .frame(height: 22)
-                    .padding(.trailing, 14)
+        VStack(spacing: 0) {
+            // Non-interactive strip under the traffic lights — safe for window dragging.
+            HStack(spacing: 0) {
+                Color.clear
+                    .frame(width: WindowChromeMetrics.trafficLightLeadingInset)
+                    .accessibilityHidden(true)
+                if let logo = NSImage(named: "eastmarkhk_logo") {
+                    Image(nsImage: logo)
+                        .resizable()
+                        .interpolation(.high)
+                        .scaledToFit()
+                        .frame(height: 18)
+                        .allowsHitTesting(false)
+                }
+                Spacer(minLength: 0)
             }
+            .frame(height: WindowChromeMetrics.titlebarHeight)
+            .background(AppTheme.greenLight)
 
-            HStack(spacing: 4) {
-                ForEach(AppTab.allCases) { tab in
-                    ChromeTabButton(
-                        title: l10n.t(tab.l10nKey),
-                        icon: tab.icon,
-                        isSelected: selectedTab == tab
-                    ) {
-                        selectedTab = tab
+            HStack(spacing: 0) {
+                HStack(spacing: 4) {
+                    ForEach(AppTab.allCases) { tab in
+                        ChromeTabButton(
+                            title: l10n.t(tab.l10nKey),
+                            icon: tab.icon,
+                            isSelected: selectedTab == tab
+                        ) {
+                            selectedTab = tab
+                        }
                     }
                 }
-            }
+                .padding(.leading, 12)
 
-            Spacer(minLength: 12)
+                Spacer(minLength: 12)
 
-            HStack(spacing: 8) {
-                AppActionButton(
-                    title: l10n.t("actionOpenXml"),
-                    icon: "doc.badge.plus",
-                    variant: .primary,
-                    action: onOpen
-                )
-                AppActionButton(
-                    title: l10n.t("actionSavePdf"),
-                    icon: "arrow.down.doc.fill",
-                    variant: .secondary,
-                    disabled: saveDisabled,
-                    action: onSave
-                )
-                AppIconButton(
-                    icon: "gearshape.fill",
-                    help: l10n.t("actionSettings"),
-                    action: { openSettings() }
-                )
+                HStack(spacing: 8) {
+                    AppActionButton(
+                        title: l10n.t("actionOpenXml"),
+                        icon: "doc.badge.plus",
+                        variant: .primary,
+                        action: onOpen
+                    )
+                    AppActionButton(
+                        title: l10n.t("actionSavePdf"),
+                        icon: "arrow.down.doc.fill",
+                        variant: .secondary,
+                        disabled: saveDisabled,
+                        action: onSave
+                    )
+                    AppIconButton(
+                        icon: "gearshape.fill",
+                        help: l10n.t("actionSettings"),
+                        action: { openSettings() }
+                    )
+                }
+                .padding(.trailing, 12)
             }
-            .padding(.trailing, 12)
+            .frame(height: WindowChromeMetrics.chromeBarHeight)
+            .background(AppTheme.greenLight)
         }
-        .frame(height: WindowChromeMetrics.chromeBarHeight)
-        .background(AppTheme.greenLight)
     }
 }
 
@@ -110,6 +118,7 @@ private struct ChromeTabButton: View {
             .foregroundStyle(isSelected ? AppTheme.greenDark : Color.primary.opacity(0.55))
             .padding(.horizontal, 10)
             .padding(.vertical, 7)
+            .contentShape(Rectangle())
             .background(
                 RoundedRectangle(cornerRadius: 7, style: .continuous)
                     .fill(isSelected ? Color.white.opacity(0.72) : Color.clear)
@@ -139,6 +148,7 @@ struct AppIconButton: View {
                 .font(.system(size: 11, weight: .medium))
                 .foregroundStyle(AppTheme.greenDark)
                 .frame(width: 22, height: 22)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .background(

@@ -3,14 +3,26 @@ import SwiftUI
 struct XmlView: View {
     @EnvironmentObject private var l10n: L10n
     let xml: String
+    var onOpen: (() -> Void)?
 
     var body: some View {
         if xml.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            ContentUnavailableView(
-                l10n.t("emptyInvoice"),
-                systemImage: "chevron.left.forwardslash.chevron.right",
-                description: Text(l10n.t("emptyInvoiceHint"))
-            )
+            VStack(spacing: 16) {
+                ContentUnavailableView(
+                    l10n.t("emptyInvoice"),
+                    systemImage: "chevron.left.forwardslash.chevron.right",
+                    description: Text(l10n.t("emptyInvoiceHint"))
+                )
+                if let onOpen {
+                    AppActionButton(
+                        title: l10n.t("actionOpenXml"),
+                        icon: "doc.badge.plus",
+                        variant: .primary,
+                        action: onOpen
+                    )
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             XmlTextView(text: xml)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

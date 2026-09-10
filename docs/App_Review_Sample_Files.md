@@ -2,11 +2,18 @@
 
 Apple App Review needs downloadable PEPPOL XML samples hosted at a permanent URL.
 
-## Permanent sample URLs (live now)
+## Easiest download (recommended)
 
-These are on the public GitHub repository (HTTP 200 verified):
+ZIP of all three samples:  
+https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/EastmarkHK_Invoice_Reader_App_Review_Samples.zip
 
-1. **Invoice without embedded PDF** (use this first):  
+Unzip, then in the app use **File → Open XML…** and pick one of the `.xml` files.
+
+## Individual sample URLs (must be Raw / direct .xml)
+
+> Important: use these **raw** links. Do **not** open/save the GitHub webpage (that HTML causes `crossorigin` XML errors).
+
+1. **Invoice without embedded PDF** (primary):  
    https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/01_invoice_generated_pdf.xml
 
 2. **Invoice with embedded PDF**:  
@@ -17,18 +24,9 @@ These are on the public GitHub repository (HTTP 200 verified):
 
 Folder: https://github.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/tree/main/samples
 
-## Website mirrors (after FTP deploy of eastmarkhk.com)
-
-- https://eastmarkhk.com/samples/peppol-invoice-reader/
-- https://eastmarkhk.com/samples/peppol-invoice-reader/01_invoice_generated_pdf.xml
-- https://eastmarkhk.com/samples/peppol-invoice-reader/02_invoice_embedded_pdf.xml
-- https://eastmarkhk.com/samples/peppol-invoice-reader/03_credit_note.xml
-
-Files are already committed in the `eastmarkhk.com` repo under `samples/peppol-invoice-reader/`. Upload that folder to the live server (PhpStorm Deployment / FTP) so the brand domain URLs work too.
-
 ## How reviewers should test
 
-1. Download a sample XML.
+1. Download the ZIP (or a raw `.xml` file) — not a GitHub HTML page.
 2. In the app: **File → Open XML…** (⌘O) or the green **Open XML…** button.
 3. Check Summary, Lines, XML, PDF preview, then **Save PDF…**.
 
@@ -37,9 +35,14 @@ Files are already committed in the `eastmarkhk.com` repo under `samples/peppol-i
 ```
 Hello,
 
-Thank you for the feedback. Here are permanent sample PEPPOL / UBL XML files for App Review:
+Thank you for the feedback. Here are permanent sample PEPPOL / UBL XML files for App Review.
 
-1) Invoice without embedded PDF (primary test file):
+Easiest: download this ZIP, unzip it, then open any .xml file with File → Open XML… (⌘O):
+https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/EastmarkHK_Invoice_Reader_App_Review_Samples.zip
+
+Or download individual raw XML files (use these direct links, not the GitHub web page):
+
+1) Invoice without embedded PDF (primary):
 https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/01_invoice_generated_pdf.xml
 
 2) Invoice with embedded PDF attachment:
@@ -48,12 +51,9 @@ https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/m
 3) Credit note:
 https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/03_credit_note.xml
 
-Index / folder:
-https://github.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/tree/main/samples
-
-How to test in the app:
+How to test:
 • File → Open XML… (⌘O), or click the green Open XML… button
-• Open the downloaded XML
+• Open a downloaded .xml file from the ZIP
 • Review Summary, Lines, XML, and PDF tabs
 • Optionally use Save PDF…
 

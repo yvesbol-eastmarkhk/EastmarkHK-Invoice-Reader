@@ -1,9 +1,6 @@
-# App Review sample files
+# App Review samples
 
-Permanent URLs (GitHub raw — live):
+Download ZIP:  
+https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/EastmarkHK_Invoice_Reader_App_Review_Samples.zip
 
-1. https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/01_invoice_generated_pdf.xml
-2. https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/02_invoice_embedded_pdf.xml
-3. https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/03_credit_note.xml
-
-See `docs/App_Review_Sample_Files.md` for the App Store Connect reply text.
+See `docs/App_Review_Sample_Files.md` for App Store Connect reply text.

@@ -12,6 +12,12 @@ enum PeppolParser {
             throw PeppolParseError.invalidXML(error.localizedDescription)
         }
 
+        if looksLikeHTML(data) {
+            throw PeppolParseError.invalidXML(
+                "This file looks like a web page, not a PEPPOL XML invoice. Download the raw .xml file (not the GitHub/web page), then open that file."
+            )
+        }
+
         let document: XMLDocument
         do {
             document = try XMLDocument(data: data, options: [.nodePreserveAll, .nodeCompactEmptyElement])
@@ -215,6 +221,15 @@ enum PeppolParser {
         }
 
         return payment
+    }
+
+    private static func looksLikeHTML(_ data: Data) -> Bool {
+        guard let head = String(data: data.prefix(1024), encoding: .utf8)?.lowercased() else {
+            return false
+        }
+        return head.contains("<html")
+            || head.contains("<!doctype html")
+            || head.contains("crossorigin")
     }
 
     private static func prettyPrint(document: XMLDocument) -> String {

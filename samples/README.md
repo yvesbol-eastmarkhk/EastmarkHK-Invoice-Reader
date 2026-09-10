@@ -1,23 +1,9 @@
 # App Review sample files
 
-Hosted permanently at:
+Permanent URLs (GitHub raw — live):
 
-https://eastmarkhk.com/samples/peppol-invoice-reader/
+1. https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/01_invoice_generated_pdf.xml
+2. https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/02_invoice_embedded_pdf.xml
+3. https://raw.githubusercontent.com/yvesbol-eastmarkhk/EastmarkHK-Invoice-Reader/main/samples/03_credit_note.xml
 
-| File | What it tests |
-|------|----------------|
-| `01_invoice_generated_pdf.xml` | Open XML → Summary / Lines / XML / generated PDF / Save PDF |
-| `02_invoice_embedded_pdf.xml` | Embedded PDF path (PDF tab shows attachment) |
-| `03_credit_note.xml` | Credit Note document type |
-
-## App Store Connect reply (copy)
-
-Please use these sample PEPPOL XML files for review (hosted permanently on our website):
-
-1. Invoice without embedded PDF (primary): https://eastmarkhk.com/samples/peppol-invoice-reader/01_invoice_generated_pdf.xml
-2. Invoice with embedded PDF: https://eastmarkhk.com/samples/peppol-invoice-reader/02_invoice_embedded_pdf.xml
-3. Credit note: https://eastmarkhk.com/samples/peppol-invoice-reader/03_credit_note.xml
-
-Index page: https://eastmarkhk.com/samples/peppol-invoice-reader/
-
-In the app: File → Open XML… (⌘O) or the green Open XML… button, then select a downloaded sample.
+See `docs/App_Review_Sample_Files.md` for the App Store Connect reply text.

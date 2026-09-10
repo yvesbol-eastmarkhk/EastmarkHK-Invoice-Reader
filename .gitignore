@@ -14,6 +14,7 @@ dist/
 DerivedData/
 *.dmg
 *.zip
+!samples/EastmarkHK_Invoice_Reader_App_Review_Samples.zip
 
 # Xcode (generated via XcodeGen)
 *.xcodeproj/

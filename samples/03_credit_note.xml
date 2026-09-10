@@ -17,7 +17,7 @@
   </cac:BillingReference>
   <cac:AccountingSupplierParty>
     <cac:Party>
-      <cac:PartyName><cbc:Name>Eastmark (Asia) Limited</cbc:Name></cac:PartyName>
+      <cac:PartyName><cbc:Name>EastmarkHK</cbc:Name></cac:PartyName>
       <cac:PostalAddress>
         <cbc:StreetName>Unit 12, Kwai Fung Industrial Building</cbc:StreetName>
         <cbc:CityName>Kwai Chung</cbc:CityName>
@@ -29,7 +29,7 @@
         <cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
       </cac:PartyTaxScheme>
       <cac:PartyLegalEntity>
-        <cbc:RegistrationName>Eastmark (Asia) Limited</cbc:RegistrationName>
+        <cbc:RegistrationName>EastmarkHK</cbc:RegistrationName>
       </cac:PartyLegalEntity>
     </cac:Party>
   </cac:AccountingSupplierParty>

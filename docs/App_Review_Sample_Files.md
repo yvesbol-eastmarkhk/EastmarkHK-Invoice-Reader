@@ -60,5 +60,5 @@ How to test in the app:
 These URLs will remain available for future reviews.
 
 Best regards,
-Eastmark (Asia) Limited
+EastmarkHK
 ```

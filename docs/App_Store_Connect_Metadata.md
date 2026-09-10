@@ -11,7 +11,7 @@ Copy-paste text for the App Store Connect listing (macOS app, free).
 - **Primary category**: Business
 - **Secondary category** (optional): Productivity
 - **Price**: Free
-- **Copyright**: `© 2026 Eastmark (Asia) Limited`
+- **Copyright**: `© 2026 EastmarkHK`
 
 ## Promotional text (170 char max — editable anytime without a new review)
 
